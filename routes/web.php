@@ -19,7 +19,7 @@ Route::get('/', function () {
 Route::post('/api/user/register', 'UserController@registro');
 
 //rutas billetera
-Route::post('/api/billetera/recargar', 'UserController@registro');
+Route::post('/api/billetera/recargar', 'UserController@recargar');
 Route::post('/api/billetera/pagar', 'UserController@registro');
 Route::post('/api/billetera/confirmar', 'UserController@registro');
 Route::get('/api/billetera/consultar', 'UserController@registro');
