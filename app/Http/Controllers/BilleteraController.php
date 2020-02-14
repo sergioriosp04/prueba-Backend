@@ -16,10 +16,9 @@ class BilleteraController extends Controller
             //limpiar datos
             $params_array = array_map('trim', $params_array);
             $validator = \Validator::make($params_array, [
-                'nombre' => 'required',
-                'email' => 'required',
                 'celular' => 'required|numeric',
-                'documento' => 'required|numeric'
+                'documento' => 'required|numeric',
+                'valor' => 'required|numeric'
             ]);
 
             if($validator->fails()){
@@ -36,7 +35,7 @@ class BilleteraController extends Controller
             $data = [
                 'success' => 'error',
                 'code' => 400,
-                'message' => 'los datos enviados son erroneos'
+                'message' => 'no se enviaron datos o son incorrectos'
             ];
         }
         return response()->json($data, $data['code']);
@@ -50,7 +49,36 @@ class BilleteraController extends Controller
         return 'confirmar';
     }
 
-    public function consultar(){
-        return 'consultar';
+    public function consultar(Request $request){
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+
+        if(!empty($params_array)){
+            //limpiar datos
+            $params_array = array_map('trim', $params_array);
+            $validator = \Validator::make($params_array, [
+                'celular' => 'required|numeric',
+                'documento' => 'required|numeric',
+            ]);
+
+            if($validator->fails()){
+                $data = [
+                    'success' => 'error',
+                    'code' => 400,
+                    'message' => $validator->errors()
+                ];
+            }else{
+                // datos validos, enviar a la capa 1
+                return ' enviando datos a la capa 1';
+            }
+        }else{
+            $data = [
+                'success' => 'error',
+                'code' => 400,
+                'message' => 'No se enviaron datos o son incorrectos'
+            ];
+        }
+        return response()->json($data, $data['code']);
     }
 }

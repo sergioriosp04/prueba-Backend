@@ -19,8 +19,6 @@ class UserController extends Controller
             $params_array = array_map('trim', $params_array);
 
             $validator = \Validator::make($params_array, [
-                'nombre' => 'required',
-                'email' => 'required',
                 'celular' => 'required|numeric',
                 'documento' => 'required|numeric'
             ]);
@@ -39,7 +37,7 @@ class UserController extends Controller
             $data = [
                 'success' => 'error',
                 'code' => 400,
-                'message' => 'los datos enviados son erroneos'
+                'message' => 'no se enviaron datos o son incorrectos'
             ];
         }
 
