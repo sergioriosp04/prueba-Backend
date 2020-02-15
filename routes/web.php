@@ -16,10 +16,10 @@ Route::get('/', function () {
 });
 
 //rutas usuario
-Route::post('/api/user/register', 'UserController@registro');
+Route::post('/api/user/registro', 'UserController@registro');
 
 //rutas billetera
 Route::post('/api/billetera/recargar', 'billeteraController@recargar');
-Route::post('/api/billetera/pagar', 'billeteraController@registro');
+Route::post('/api/billetera/pagar', 'billeteraController@pagar');
 Route::post('/api/billetera/confirmar', 'billeteraController@registro');
 Route::post('/api/billetera/consultar', 'billeteraController@consultar');
