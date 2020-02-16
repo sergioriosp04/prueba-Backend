@@ -36,22 +36,13 @@ class UserController extends Controller
                 $url = 'http://prueba-api-db.test/registro';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
-                //attach encoded JSON string to the POST fields
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
-
-//set the content type to application/json
-                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
-
-//return response instead of outputting
+                //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-
-//execute the POST request
                 $result = curl_exec($ch);
-                dd($result);
-
-//close cURL resource
-                curl_close($ch);
-                return ' enviando datos a la capa 1';
+                $result_json = json_decode($result, true);
+                $data = $result_json;
             }
         }else{
             $data = [

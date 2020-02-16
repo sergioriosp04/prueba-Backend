@@ -134,7 +134,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../prueba-api-db" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -163,7 +163,8 @@
       <workItem from="1581646679558" duration="5750000" />
       <workItem from="1581718006754" duration="939000" />
       <workItem from="1581734676111" duration="2467000" />
-      <workItem from="1581777859852" duration="4912000" />
+      <workItem from="1581777859852" duration="7918000" />
+      <workItem from="1581889812637" duration="5672000" />
     </task>
     <servers />
   </component>
