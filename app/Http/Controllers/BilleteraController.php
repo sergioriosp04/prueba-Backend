@@ -7,6 +7,13 @@ use Illuminate\Http\Response;
 
 class BilleteraController extends Controller
 {
+    public $url;
+
+    public function __construct(){
+        $this->url = 'http://prueba-api-db.test/';
+    }
+
+
     public function recargar(Request $request){
         $json = $request->input('json', null);
         $params = json_decode($json);
@@ -29,7 +36,7 @@ class BilleteraController extends Controller
                 ];
             }else{
                 // datos validos, enviar a la capa 1
-                $url = 'http://prueba-api-db.test/recargar';
+                $url = $this->url . 'recargar';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -72,7 +79,7 @@ class BilleteraController extends Controller
                 ];
             }else{
                 // datos validos, enviar a la capa 1
-                $url = 'http://prueba-api-db.test/pagar';
+                $url = $this->url . 'pagar';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -113,7 +120,7 @@ class BilleteraController extends Controller
             }else{
                 // datos validos, enviar a la capa 1
                 $authorization = 'Authorization:'. $jwt;
-                $url = 'http://prueba-api-db.test/confirmar';
+                $url = $this->url . 'confirmar';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
@@ -155,7 +162,7 @@ class BilleteraController extends Controller
                     'message' => $validator->errors()
                 ];
             }else{
-                $url = 'http://prueba-api-db.test/consultar';
+                $url = $this->url . 'consultar';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);

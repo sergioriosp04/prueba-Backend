@@ -7,7 +7,12 @@ use Illuminate\Http\Response;
 
 class UserController extends Controller
 {
-    //
+    public $url;
+
+    public function __construct(){
+        $this->url = 'http://prueba-api-db.test/';
+    }
+
     public function registro(Request $request){
 
         $json = $request->input('json', null);
@@ -33,7 +38,7 @@ class UserController extends Controller
                 ];
             }else{
                 // datos validos, enviar a la capa 1
-                $url = 'http://prueba-api-db.test/registro';
+                $url = $this->url . 'registro';
                 $ch = curl_init($url);
                 $payload = json_encode($params_array);
                 curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
