@@ -21,5 +21,5 @@ Route::post('/api/user/registro', 'UserController@registro');
 //rutas billetera
 Route::post('/api/billetera/recargar', 'billeteraController@recargar');
 Route::post('/api/billetera/pagar', 'billeteraController@pagar');
-Route::post('/api/billetera/confirmar', 'billeteraController@registro');
+Route::post('/api/billetera/confirmar', 'billeteraController@confirmar');
 Route::post('/api/billetera/consultar', 'billeteraController@consultar');

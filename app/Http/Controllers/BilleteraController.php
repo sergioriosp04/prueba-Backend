@@ -29,7 +29,16 @@ class BilleteraController extends Controller
                 ];
             }else{
                 // datos validos, enviar a la capa 1
-                return ' enviando datos a la capa 1';
+                $url = 'http://prueba-api-db.test/recargar';
+                $ch = curl_init($url);
+                $payload = json_encode($params_array);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                $result_json = json_decode($result, true);
+                $data = $result_json;
             }
         }else{
             $data = [
@@ -63,7 +72,16 @@ class BilleteraController extends Controller
                 ];
             }else{
                 // datos validos, enviar a la capa 1
-                return ' enviando datos a la capa 1';
+                $url = 'http://prueba-api-db.test/pagar';
+                $ch = curl_init($url);
+                $payload = json_encode($params_array);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                $result_json = json_decode($result, true);
+                $data = $result_json;
             }
         }else{
             $data = [
@@ -75,8 +93,45 @@ class BilleteraController extends Controller
         return response()->json($data, $data['code']);
     }
 
-    public function confirmar(){
-        return 'confirmar';
+    public function confirmar(Request $request){
+        $jwt = $request->header('Authorization');
+        $json = $request->input('json', null);
+        $params = json_decode($json);
+        $params_array = json_decode($json, true);
+
+        if(!empty($params_array)){
+            $validator = \Validator::make($params_array,[
+                'token' => 'required|size:6'
+            ]);
+            if($validator->fails()){
+                $data = [
+                    'status' => 'error',
+                    'code' => 400,
+                    'message' => $validator->errors()
+                ];
+            }else{
+                // datos validos, enviar a la capa 1
+                $authorization = 'Authorization:'. $jwt;
+                $url = 'http://prueba-api-db.test/confirmar';
+                $ch = curl_init($url);
+                $payload = json_encode($params_array);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json', $authorization));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                return $result;
+                $result_json = json_decode($result, true);
+                $data = $result_json;
+            }
+        }else{
+            $data = [
+                'status' => 'error',
+                'code' => 400,
+                'message' => 'no se envio el token'
+            ];
+        }
+        return response()->json($data, $data['code']);
     }
 
     public function consultar(Request $request){
@@ -99,8 +154,16 @@ class BilleteraController extends Controller
                     'message' => $validator->errors()
                 ];
             }else{
-                // datos validos, enviar a la capa 1
-                return ' enviando datos a la capa 1';
+                $url = 'http://prueba-api-db.test/consultar';
+                $ch = curl_init($url);
+                $payload = json_encode($params_array);
+                curl_setopt($ch, CURLOPT_POSTFIELDS, $payload);
+                //curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/x-www-form-urlencoded'));
+                curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type:application/json'));
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                $result = curl_exec($ch);
+                $result_json = json_decode($result, true);
+                $data = $result_json;
             }
         }else{
             $data = [
