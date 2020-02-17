@@ -1,3 +1,15 @@
+<h1> Esta es la api que recibe los datos del cliente <h1>
+    
+    para utilizarla solo se debe cambiar en los controladores la url en la que esta montada la otra api:
+    
+    public function __construct(){
+        $this->url = 'URL DE LA OTRA API';
+    }
+
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------
 <p align="center"><img src="https://laravel.com/assets/img/components/logo-laravel.svg"></p>
 
 <p align="center">
