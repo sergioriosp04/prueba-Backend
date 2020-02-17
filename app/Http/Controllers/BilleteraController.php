@@ -100,6 +100,7 @@ class BilleteraController extends Controller
         $params_array = json_decode($json, true);
 
         if(!empty($params_array)){
+            $params_array = array_map('trim', $params_array);
             $validator = \Validator::make($params_array,[
                 'token' => 'required|size:6'
             ]);
